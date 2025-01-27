@@ -1,10 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { CoursesService } from './../services/courses.service';
+import { Component, DestroyRef, inject, OnInit, Signal, signal } from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Course } from '../model/course';
-import { CoursesService } from '../services/courses.service';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -12,18 +12,17 @@ import { Observable } from 'rxjs';
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.scss'
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent {
 
-  courses: Course[] = [];
+  private destroyRef = inject(DestroyRef);
+  private CoursesService = inject(CoursesService);
+
+  courses : Course[] = [];
   displayedColumns = ['name', 'category']
 
-  constructor(private courseService: CoursesService){
-    this.courseService.getList().subscribe(course => this.courses = course);
+  constructor(){
+    this.CoursesService.getList().subscribe(courses => this.courses = courses);
+    console.log(this.courses)
   }
-
-  ngOnInit(): void {
-
-  }
-
 
 }
