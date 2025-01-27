@@ -1,14 +1,16 @@
 import { CoursesService } from './../services/courses.service';
-import { Component, DestroyRef, inject, OnInit, Signal, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, Signal, signal, PipeTransform } from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Course } from '../model/course';
 import { Observable, catchError } from 'rxjs';
+import { CategoryPipe } from '../../shared/pipes/category.pipe';
 
 @Component({
   selector: 'app-courses',
-  imports: [MatTableModule, MatCardModule, MatToolbarModule],
+  imports: [MatTableModule, MatCardModule, MatToolbarModule, MatIconModule, CategoryPipe],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.scss'
 })
